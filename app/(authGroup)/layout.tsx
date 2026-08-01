@@ -1,5 +1,14 @@
+import { Navbar } from "@/components/shared/Navbar";
+import { getMe } from "@/services/getMe";
+
 const AuthGroupLayout = async ({ children }: { children: React.ReactNode }) => {
-  return <div>{children}</div>;
+  const user = await getMe();
+  return (
+    <div>
+      <Navbar user={user}></Navbar>
+      {children}
+    </div>
+  );
 };
 
 export default AuthGroupLayout;

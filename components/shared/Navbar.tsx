@@ -39,11 +39,11 @@ export function Navbar({ user }: NavbarProps) {
   const router = useRouter();
   const handleUserMenuAction = async (action: string) => {
     if (action === "dashboard") {
-      if (user.data.profile.role === "CUSTOMER") {
+      if (user.data.result.role === "CUSTOMER") {
         router.push("/customer-dashboard");
-      } else if (user.data.profile.role === "PROVIDER") {
+      } else if (user.data.result.role === "PROVIDER") {
         router.push("/provider-dashboard");
-      } else if (user.data.profile.role === "ADMIN") {
+      } else if (user.data.result.role === "ADMIN") {
         router.push("/admin-dashboard");
       }
 
@@ -95,10 +95,10 @@ export function Navbar({ user }: NavbarProps) {
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col gap-1">
                     <p className="text-sm font-medium">
-                      {user.data?.profile.name}
+                      {user.data?.result.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {user.data?.profile.email}
+                      {user.data?.result.email}
                     </p>
                   </div>
                 </DropdownMenuLabel>
