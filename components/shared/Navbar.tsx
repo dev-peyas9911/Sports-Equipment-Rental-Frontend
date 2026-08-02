@@ -64,7 +64,7 @@ export function Navbar({ user }: NavbarProps) {
           {/* Logo */}
           <Link href="/" className="shrink-0">
             <span className="text-2xl font-bold text-primary">
-              NextJs Press
+              GearGo Rentals
             </span>
           </Link>
 
