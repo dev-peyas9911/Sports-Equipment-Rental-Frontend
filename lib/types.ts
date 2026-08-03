@@ -35,3 +35,33 @@ export type ISidebarItem = {
     href: string,
     icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>
 }
+
+export type GearCategory = {
+    id: string;
+    name: string;
+};
+
+export type GearItem = {
+    id: string;
+    name: string;
+    brand: string | null;
+    description: string;
+    pricePerDay: number | string;
+    stock: number;
+    availableStock: number;
+    condition: string;
+    images: string[];
+    specifications: Record<string, unknown> | null;
+    isAvailable: boolean;
+    categoryId?: string;
+    category?: GearCategory | null;
+    createdAt?: string;
+};
+
+export const CONDITION_LABELS: Record<string, string> = {
+    NEW: "New",
+    LIKE_NEW: "Like New",
+    GOOD: "Good",
+    FAIR: "Fair",
+    POOR: "Poor",
+};

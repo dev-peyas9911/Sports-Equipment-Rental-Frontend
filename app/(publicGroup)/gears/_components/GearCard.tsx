@@ -3,9 +3,17 @@ import { Bike, PackageOpen } from "lucide-react";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CONDITION_LABELS, type GearItem } from "../_lib/getGears";
+import { CONDITION_LABELS, type GearItem } from "@/lib/types";
+import RentButton from "./RentButton";
 
-const GearCard = ({ gear }: { gear: GearItem }) => {
+type GearCardProps = {
+  gear: GearItem;
+  canRent?: boolean;
+  authenticated?: boolean;
+  redirectTo?: string;
+};
+
+const GearCard = ({ gear, canRent = false, authenticated = false, redirectTo = "/" }: GearCardProps) => {
   const cover = gear.images?.[0];
   const price = Number(gear.pricePerDay);
   const conditionLabel = CONDITION_LABELS[gear.condition] ?? gear.condition;
@@ -62,15 +70,21 @@ const GearCard = ({ gear }: { gear: GearItem }) => {
           </span>
           <span className="text-xs text-muted-foreground"> / day</span>
         </div>
-        <Button size="sm" disabled={outOfStock}>
-          {outOfStock ? (
-            <>
-              <PackageOpen /> Unavailable
-            </>
-          ) : (
-            "Rent"
-          )}
-        </Button>
+        {outOfStock ? (
+          <Button size="sm" disabled>
+            <PackageOpen /> Unavailable
+          </Button>
+        ) : (
+          <RentButton
+            gearItemId={gear.id}
+            gearName={gear.name}
+            pricePerDay={price}
+            availableStock={gear.availableStock}
+            canRent={canRent}
+            authenticated={authenticated}
+            redirectTo={redirectTo}
+          />
+        )}
       </CardFooter>
     </Card>
   );

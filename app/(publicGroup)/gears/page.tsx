@@ -2,9 +2,13 @@ import { PackageOpen } from "lucide-react";
 
 import GearCard from "./_components/GearCard";
 import { getGears } from "./_lib/getGears";
+import { getMe } from "@/services/getMe";
 
 const GearsPage = async () => {
-  const gears = await getGears();
+  const [gears, user] = await Promise.all([getGears(), getMe()]);
+
+  const authenticated = user.success;
+  const canRent = authenticated && user.data?.result?.role === "CUSTOMER";
 
   return (
     <div className="mx-auto max-w-7xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
@@ -23,7 +27,12 @@ const GearsPage = async () => {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {gears.map((gear) => (
-            <GearCard key={gear.id} gear={gear} />
+            <GearCard
+              key={gear.id}
+              gear={gear}
+              canRent={canRent}
+              authenticated={authenticated}
+            />
           ))}
         </div>
       )}

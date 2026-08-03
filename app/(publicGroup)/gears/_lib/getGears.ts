@@ -1,32 +1,6 @@
 import { cookies } from "next/headers";
 
-export type GearCategory = {
-  id: string;
-  name: string;
-};
-
-export type GearItem = {
-  id: string;
-  name: string;
-  brand: string | null;
-  description: string;
-  pricePerDay: number | string;
-  stock: number;
-  availableStock: number;
-  condition: string;
-  images: string[];
-  specifications: Record<string, unknown> | null;
-  isAvailable: boolean;
-  category?: GearCategory | null;
-};
-
-export const CONDITION_LABELS: Record<string, string> = {
-  NEW: "New",
-  LIKE_NEW: "Like New",
-  GOOD: "Good",
-  FAIR: "Fair",
-  POOR: "Poor",
-};
+import { type GearItem } from "@/lib/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
